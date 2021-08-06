@@ -16,7 +16,13 @@ class RockPaperScissors < Sinatra::Base
   end
 
   get '/end_screen_win' do
-    'Michael Wins!'
+    @player_name = params[:player_name]
+    erb :win
+  end
+
+  get '/end_screen_lose' do
+    @player_name = params[:player_name]
+    erb :lose
   end
 
   run! if app_file == $0
