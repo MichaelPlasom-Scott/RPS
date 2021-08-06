@@ -4,9 +4,7 @@
 
 feature 'Enter names' do
   scenario 'submitting names' do
-    visit('/')
-    fill_in :player_name, with: 'Michael'
-    click_button 'Submit'
+    enter_name_and_submit
     # save_and_open_page
     expect(page).to have_content 'Michael! Rock, Paper, or Scissors?'
   end
