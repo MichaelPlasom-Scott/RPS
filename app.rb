@@ -2,6 +2,8 @@ require 'sinatra/base'
 
 class RockPaperScissors < Sinatra::Base
 
+  enable :sessions
+
   get '/test' do
     'test page'
   end
@@ -11,18 +13,15 @@ class RockPaperScissors < Sinatra::Base
   end
 
   post '/names' do
-    @player_name = params[:player_name]
+    session[:player_name] = params[:player_name]
+    @player_name = session[:player_name]
     erb :play
   end
 
-  get '/end_screen_win' do
-    @player_name = params[:player_name]
-    erb :win
-  end
-
-  get '/end_screen_lose' do
-    @player_name = params[:player_name]
-    erb :lose
+  post '/player_1_chosen' do
+    @player_name = session[:player_name]
+    @player_1_choice = params[:player_1_chose]
+    erb :outcome
   end
 
   run! if app_file == $0
